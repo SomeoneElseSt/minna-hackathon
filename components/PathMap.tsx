@@ -99,6 +99,7 @@ export default function PathMap({ challenges }: Props) {
       {points.map((p, i) => {
         const isLeft = p.x < 50;
         const decorX = isLeft ? p.x + 25 : p.x - 25;
+        const left = Math.max(6, Math.min(94, decorX));
         const decorType = i % 3;
         
         if (i % 2 === 0) return null;
@@ -108,9 +109,9 @@ export default function PathMap({ challenges }: Props) {
             key={`decor-${i}`}
             className={`decor decor-${decorType}`}
             style={{ 
-              left: `${decorX}%`, 
+              left: `${left}%`, 
               top: p.y - 20,
-              transform: `scale(${0.8 + (i % 5) * 0.1}) rotate(${ (i * 10) % 20 - 10 }deg)`
+              transform: `translate(-50%, -50%) scale(${0.8 + (i % 5) * 0.1}) rotate(${ (i * 10) % 20 - 10 }deg)`
             }} 
           />
         );

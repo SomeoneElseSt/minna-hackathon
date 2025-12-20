@@ -8,14 +8,6 @@ export async function GET(_req: NextRequest) {
     return Response.json({ ok: false, message: "Supabase env missing" }, { status: 400 });
   }
 
-  const { data: existing } = await client
-    .from("challenges")
-    .select("id")
-    .limit(1);
-  if (existing && existing.length > 0) {
-    return Response.json({ ok: true, message: "Challenges already exist" }, { status: 200 });
-  }
-
   const seed = buildSeedChallenges().map((c) => ({
     title: c.title,
     description: c.description,
@@ -25,10 +17,53 @@ export async function GET(_req: NextRequest) {
     points: c.points
   }));
 
-  const { error } = await client.from("challenges").insert(seed);
-  if (error) {
-    return Response.json({ ok: false, message: "Insert failed", detail: error.message }, { status: 500 });
+  const { data: existingRows, error: existingError } = await client
+    .from("challenges")
+    .select("id,order");
+  if (existingError) {
+    return Response.json({ ok: false, message: "Select failed", detail: existingError.message }, { status: 500 });
   }
 
-  return Response.json({ ok: true, count: seed.length }, { status: 200 });
+  const byOrder = new Map<number, number>();
+  (existingRows || []).forEach((r: { id: number; order: number }) => {
+    byOrder.set(r.order, r.id);
+  });
+
+  let updated = 0;
+  let inserted = 0;
+
+  for (const row of seed) {
+    const existingId = byOrder.get(row.order);
+    if (existingId) {
+      const { error: updateError } = await client
+        .from("challenges")
+        .update({
+          title: row.title,
+          description: row.description,
+          goals: row.goals,
+          icon: row.icon,
+          points: row.points
+        })
+        .eq("id", existingId);
+      if (updateError) {
+        return Response.json(
+          { ok: false, message: "Update failed", detail: updateError.message },
+          { status: 500 }
+        );
+      }
+      updated += 1;
+      continue;
+    }
+
+    const { error: insertError } = await client.from("challenges").insert(row);
+    if (insertError) {
+      return Response.json(
+        { ok: false, message: "Insert failed", detail: insertError.message },
+        { status: 500 }
+      );
+    }
+    inserted += 1;
+  }
+
+  return Response.json({ ok: true, updated, inserted, total: seed.length }, { status: 200 });
 }
