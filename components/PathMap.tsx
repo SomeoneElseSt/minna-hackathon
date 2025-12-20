@@ -9,15 +9,13 @@ type Props = {
 
 type Pos = { x: number; y: number };
 
-const STEP_HEIGHT = 160; // Vertical distance between nodes
-const X_AMPLITUDE = 30; // How wide the path swings (percentage)
-const START_Y = 100; // Initial top padding
+const STEP_HEIGHT = 160;
+const X_AMPLITUDE = 30;
+const START_Y = 100;
 
 function getPositions(count: number): Pos[] {
   return Array.from({ length: count }).map((_, i) => {
-    // Sine wave for X: Center is 50%, swing left/right
-    // Frequency: Complete a full wave every ~4-5 items
-    const x = 50 + X_AMPLITUDE * Math.sin(i * 1.2); 
+    const x = 50 + X_AMPLITUDE * Math.sin(i * 1.2);
     const y = START_Y + i * STEP_HEIGHT;
     return { x, y };
   });
@@ -28,7 +26,7 @@ function generatePath(points: Pos[]): string {
   const first = points[0];
   if (!first) return "";
   
-  let d = `M ${first.x}% ${first.y}`; // Start at first node
+  let d = `M ${first.x} ${first.y}`;
   
   if (points.length < 2) return d;
 
@@ -38,14 +36,10 @@ function generatePath(points: Pos[]): string {
     
     if (!current || !next) continue;
 
-    // Control points for bezier curve
-    // We want a vertical S-curve.
-    // CP1 is below current point
-    // CP2 is above next point
     const cp1y = current.y + STEP_HEIGHT * 0.5;
     const cp2y = next.y - STEP_HEIGHT * 0.5;
     
-    d += ` C ${current.x}% ${cp1y}, ${next.x}% ${cp2y}, ${next.x}% ${next.y}`;
+    d += ` C ${current.x} ${cp1y}, ${next.x} ${cp2y}, ${next.x} ${next.y}`;
   }
   
   return d;
@@ -55,18 +49,19 @@ export default function PathMap({ challenges }: Props) {
   const points = getPositions(challenges.length);
   const pathData = generatePath(points);
   
-  // Calculate total height needed
   const lastPoint = points.length > 0 ? points[points.length - 1] : null;
   const lastY = lastPoint ? lastPoint.y : 0;
-  const totalHeight = lastY + 150; // Extra padding at bottom
+  const totalHeight = lastY + 150;
 
   return (
-    <div className="map-container" style={{ height: totalHeight, position: 'relative' }}>
+    <div className="map-container" style={{ height: totalHeight, position: "relative" }}>
       <svg 
         className="path-svg" 
         width="100%" 
         height={totalHeight} 
-        style={{ position: 'absolute', top: 0, left: 0 }}
+        viewBox={`0 0 100 ${totalHeight}`}
+        preserveAspectRatio="none"
+        style={{ position: "absolute", top: 0, left: 0, zIndex: 0, pointerEvents: "none" }}
       >
         <defs>
           <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -75,16 +70,14 @@ export default function PathMap({ challenges }: Props) {
           </linearGradient>
         </defs>
         
-        {/* Background thick track */}
         <path 
           d={pathData} 
           fill="none" 
-          stroke="rgba(255, 255, 255, 0.08)" 
+          stroke="rgba(255, 255, 255, 0.14)" 
           strokeWidth="60" 
           strokeLinecap="round" 
         />
         
-        {/* Colored glowing path */}
         <path 
           d={pathData} 
           fill="none" 
@@ -93,25 +86,22 @@ export default function PathMap({ challenges }: Props) {
           strokeLinecap="round" 
         />
         
-        {/* Dashed center line */}
         <path 
           d={pathData} 
           fill="none" 
-          stroke="rgba(255, 255, 255, 0.3)" 
+          stroke="rgba(255, 255, 255, 0.35)" 
           strokeWidth="4" 
           strokeLinecap="round" 
           strokeDasharray="8 12" 
         />
       </svg>
 
-      {/* Decorations - Scattered randomly but deterministically */}
       {points.map((p, i) => {
-        // Place decoration on the "outside" of the curve or alternating
         const isLeft = p.x < 50;
-        const decorX = isLeft ? p.x + 25 : p.x - 25; // Push away from curve
-        const decorType = i % 3; // 0: star, 1: tree, 2: chest
+        const decorX = isLeft ? p.x + 25 : p.x - 25;
+        const decorType = i % 3;
         
-        if (i % 2 === 0) return null; // Don't put decor everywhere
+        if (i % 2 === 0) return null;
 
         return (
           <div 
@@ -120,7 +110,6 @@ export default function PathMap({ challenges }: Props) {
             style={{ 
               left: `${decorX}%`, 
               top: p.y - 20,
-              // Randomize slightly
               transform: `scale(${0.8 + (i % 5) * 0.1}) rotate(${ (i * 10) % 20 - 10 }deg)`
             }} 
           />
@@ -143,7 +132,6 @@ export default function PathMap({ challenges }: Props) {
           >
             <div className="node-circle">
                {idx + 1}
-               {/* Star rating placeholders */}
                <div className="stars">
                  <span>★</span><span>★</span><span>★</span>
                </div>

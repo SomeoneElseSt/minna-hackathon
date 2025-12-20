@@ -31,7 +31,7 @@ html, body {
   flex: 1 1 auto;
   padding: 16px;
   overflow-y: auto;
-  padding-bottom: 100px; /* Space for navbar */
+  padding-bottom: 100px;
 }
 
 .card {
@@ -87,14 +87,11 @@ html, body {
   outline: 2px solid rgba(124, 58, 237, 0.65);
 }
 
-/* --- Map & Path Styles --- */
-
 .map-container {
   width: 100%;
-  max-width: 500px; /* Mobile width constraint */
+  max-width: 500px;
   margin: 0 auto;
   position: relative;
-  /* overflow: hidden; Intentionally allowed to overflow vertically if needed, but horizontal hidden */
 }
 
 .node-wrapper {
@@ -120,7 +117,7 @@ html, body {
   background: linear-gradient(135deg, #fbbf24, #d97706);
   border: 4px solid #fff;
   box-shadow: 
-    0 6px 0 #b45309, /* 3D effect bottom lip */
+    0 6px 0 #b45309,
     0 12px 24px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
@@ -144,7 +141,7 @@ html, body {
 }
 
 .node-card {
-  margin-top: 12px; /* Push below the 3D lip */
+  margin-top: 12px;
   background: rgba(17, 24, 39, 0.9);
   padding: 6px 12px;
   border-radius: 12px;
@@ -172,7 +169,6 @@ html, body {
   letter-spacing: 0.5px;
 }
 
-/* Decorations */
 .decor {
   position: absolute;
   pointer-events: none;
@@ -180,7 +176,6 @@ html, body {
   z-index: 1;
 }
 
-/* Star */
 .decor-0 {
   width: 24px;
   height: 24px;
@@ -189,7 +184,6 @@ html, body {
   box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
 }
 
-/* Tree */
 .decor-1 {
   width: 28px;
   height: 40px;
@@ -198,7 +192,6 @@ html, body {
   box-shadow: 0 4px 0 #064e3b;
 }
 
-/* Chest/Box */
 .decor-2 {
   width: 32px;
   height: 26px;
