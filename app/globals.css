@@ -55,6 +55,21 @@ html, body {
   margin-bottom: 24px;
 }
 
+.home-header {
+  position: relative;
+  padding-left: 52px;
+}
+
+.home-logo {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.35);
+}
+
 .navbar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -85,6 +100,56 @@ html, body {
   color: var(--text);
   background: rgba(124, 58, 237, 0.25);
   outline: 2px solid rgba(124, 58, 237, 0.65);
+}
+
+.segmented {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.segbtn {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.85);
+  background: rgba(15, 23, 42, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.segbtn.active {
+  color: #ffffff;
+  background: linear-gradient(180deg, #a78bfa, var(--accent));
+  box-shadow: 0 10px 18px rgba(124, 58, 237, 0.35);
+}
+
+.segbtn:active {
+  transform: translateY(1px);
+}
+
+.sendbtn {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 900;
+  color: #0b0f19;
+  background: linear-gradient(180deg, #a78bfa, #7c3aed);
+  box-shadow: 0 10px 18px rgba(124, 58, 237, 0.30);
+}
+
+.sendbtn:disabled {
+  opacity: 0.55;
+  box-shadow: none;
 }
 
 .map-container {

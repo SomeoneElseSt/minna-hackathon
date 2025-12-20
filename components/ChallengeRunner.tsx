@@ -68,9 +68,21 @@ export default function ChallengeRunner({ challenge }: Props) {
   return (
     <div className="card" style={{ marginTop: 16 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-        <div style={{ display: "flex", gap: 8 }}>
-          <button className="navbtn" onClick={() => setView("chat")}>Chat</button>
-          <button className="navbtn" onClick={() => setView("artifact")}>Artifact</button>
+        <div className="segmented">
+          <button
+            type="button"
+            className={view === "chat" ? "segbtn active" : "segbtn"}
+            onClick={() => setView("chat")}
+          >
+            Chat
+          </button>
+          <button
+            type="button"
+            className={view === "artifact" ? "segbtn active" : "segbtn"}
+            onClick={() => setView("artifact")}
+          >
+            Artifact
+          </button>
         </div>
         <Link href={`/challenge/${challenge.id}`} className="navbtn">Back</Link>
       </div>
@@ -94,7 +106,7 @@ export default function ChallengeRunner({ challenge }: Props) {
               placeholder="Describe the next change..."
               style={{ flex: 1, padding: 10, borderRadius: 10, border: "1px solid rgba(255,255,255,.15)", background: "#0f172a", color: "#e5e7eb" }}
             />
-            <button className="navbtn" onClick={send} disabled={busy}>{busy ? "..." : "Send"}</button>
+            <button className="sendbtn" onClick={send} disabled={busy}>{busy ? "..." : "Send"}</button>
           </div>
         </div>
       ) : (

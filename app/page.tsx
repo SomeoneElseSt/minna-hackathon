@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import PathMap from "../components/PathMap";
 import { fetchChallenges } from "../lib/challenges";
+import Image from "next/image";
 
 export default async function Page() {
   const challenges = await fetchChallenges();
@@ -9,8 +10,13 @@ export default async function Page() {
   return (
     <div className="screen">
       <div className="content">
-        <h1 className="title">Vibe Coding Journey</h1>
-        <p className="muted">A gamified path of challenges to learn vibe coding.</p>
+        <div className="home-header">
+          <Image className="home-logo" src="/boar_image.png" alt="Minna" width={44} height={44} priority />
+          <div>
+            <h1 className="title">Vibe Coding Journey</h1>
+            <p className="muted">A gamified path of challenges to learn vibe coding.</p>
+          </div>
+        </div>
 
         {hasData ? (
           <PathMap challenges={challenges} />
