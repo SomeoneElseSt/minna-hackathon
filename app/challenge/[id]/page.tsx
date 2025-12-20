@@ -43,6 +43,10 @@ export default async function ChallengePage({ params }: Props) {
       <div className="content">
         <h1 className="title">{challenge.title}</h1>
         <p className="muted">{challenge.description}</p>
+        <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
+          <Link href={`/challenge/${challenge.id}/start`} className="navbtn active">Start Challenge</Link>
+          <Link href="/" className="navbtn">Back</Link>
+        </div>
         <div className="card" style={{ marginTop: 16 }}>
           <h2 className="title">Goals</h2>
           <ul>

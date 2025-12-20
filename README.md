@@ -49,6 +49,13 @@ curl http://localhost:3000/api/seed
 - Import the repo in Vercel
 - Set environment variables `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - Or use `SUPABASE_PROJECT_URL` and `SUPABASE_ANON_KEY` (preferred)
+
+## AI Chat & Artifact
+
+- Set `OPENAI_API_KEY` in `.env`
+- The AI model used is `gpt-4o-mini` (cost-effective)
+- Start a challenge: open a challenge detail and click `Start Challenge`
+- Chat returns two sections: `<assistant>` and `<artifact>`; the artifact is a complete HTML document, rendered in a sandboxed iframe
 - Build command: `pnpm build`; Output directory: `.next`
 
 ## Notes
