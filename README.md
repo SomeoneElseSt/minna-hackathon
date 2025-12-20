@@ -1,3 +1,9 @@
+
+**Live App**:
+```
+https://c02c6183ad85.ngrok-free.app
+```
+
 # Vibe Coding Journey (Duolingo-style)
 
 Mobile-first web app that gamifies learning vibe coding with a path of challenges. Built with Next.js + TypeScript, deployable to Vercel, using Supabase for challenge data.

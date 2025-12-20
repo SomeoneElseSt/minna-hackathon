@@ -31,41 +31,44 @@ export function buildSeedChallenges(): Challenge[] {
     },
     {
       id: 3,
-      title: "Logo Design",
-      description: "Design a minimal logo for your vibe brand.",
+      title: "Neighborhood Storefront",
+      description: "Build a storefront for a neighborhood shop of your choice.",
       goals: [
-        "Sketch 3 ideas",
-        "Pick color palette",
-        "Export SVG/PNG"
+        "Create a product grid with categories",
+        "Add product detail view and add-to-cart",
+        "Implement a simple cart with totals",
+        "Add a checkout form (mock submit)"
       ],
       order: 3,
-      icon: "logo",
-      points: 15
+      icon: "store",
+      points: 25
     },
     {
       id: 4,
-      title: "Ambient Track",
-      description: "Produce a short ambient track with 2-3 layers.",
+      title: "Disease Spread Dashboard",
+      description: "Make a dashboard for a scientific model of disease spread in a population.",
       goals: [
-        "Choose tempo and key",
-        "Layer pads and textures",
-        "Export 30-60s demo"
+        "Simulate an SIR model over time",
+        "Add sliders for parameters (β, γ, population)",
+        "Plot S/I/R curves and summary stats",
+        "Let users reset and rerun scenarios"
       ],
       order: 4,
-      icon: "music",
+      icon: "dashboard",
       points: 25
     },
     {
       id: 5,
-      title: "Interactive Art",
-      description: "Create an interactive sketch with mouse/touch input.",
+      title: "Email Automation",
+      description: "Create an automation for sending emails.",
       goals: [
-        "Render shapes",
-        "React to pointer input",
-        "Add color transitions"
+        "Design an email template with variables",
+        "Create a recipient list and filter logic",
+        "Preview and schedule a send (mock)",
+        "Log runs and show delivery status (mock)"
       ],
       order: 5,
-      icon: "art",
+      icon: "email",
       points: 25
     }
   ];
