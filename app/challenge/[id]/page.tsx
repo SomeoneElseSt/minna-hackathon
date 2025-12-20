@@ -3,11 +3,12 @@ import NavBar from "../../../components/NavBar";
 import { fetchChallenges } from "../../../lib/challenges";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function ChallengePage({ params }: Props) {
-  const id = Number(params.id);
+  const p = await params;
+  const id = Number(p.id);
   if (Number.isNaN(id)) {
     return (
       <div className="screen">
