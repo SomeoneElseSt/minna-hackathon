@@ -9,8 +9,8 @@ Mobile-first web app that gamifies learning vibe coding with a path of challenge
 - Configure env in `.env.local`:
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=your-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_PROJECT_URL=your-url
+SUPABASE_ANON_KEY=your-anon-key
 ```
 
 - Run dev server: `pnpm dev`
@@ -37,6 +37,7 @@ Insert a few rows so the path renders.
 
 - Import the repo in Vercel
 - Set environment variables `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- Or use `SUPABASE_PROJECT_URL` and `SUPABASE_ANON_KEY` (preferred)
 - Build command: `pnpm build`; Output directory: `.next`
 
 ## Notes
