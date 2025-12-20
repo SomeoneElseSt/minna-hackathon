@@ -29,9 +29,20 @@ create table if not exists public.challenges (
   icon text,
   points int not null default 10
 );
+
+-- Enable RLS and allow public read and insert (demo)
+alter table public.challenges enable row level security;
+create policy "challenges_select_public" on public.challenges for select using (true);
+create policy "challenges_insert_public_demo" on public.challenges for insert with check (true);
 ```
 
 Insert a few rows so the path renders.
+
+Or run the seed route locally after creating the table:
+
+```
+curl http://localhost:3000/api/seed
+```
 
 ## Deploy (Vercel)
 
