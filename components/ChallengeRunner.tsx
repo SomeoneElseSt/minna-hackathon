@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Challenge } from "../lib/types";
 import { initialArtifact } from "../lib/artifacts";
+import Link from "next/link";
 
 type Props = { challenge: Challenge };
 
@@ -20,10 +21,12 @@ export default function ChallengeRunner({ challenge }: Props) {
     if (busy) return;
     const text = input.trim();
     if (text.length === 0) return;
+    setInput("");
     const payload = {
       prompt: text,
       artifactHtml: artifact,
-      challengeTitle: challenge.title
+      challengeTitle: challenge.title,
+      history: messages.slice(-5)
     };
     setBusy(true);
     setErrorText("");
@@ -60,18 +63,21 @@ export default function ChallengeRunner({ challenge }: Props) {
       setView("artifact");
     }
     setBusy(false);
-    setInput("");
   }
 
   return (
     <div className="card" style={{ marginTop: 16 }}>
-      <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-        <button className="navbtn" onClick={() => setView("chat")}>Chat</button>
-        <button className="navbtn" onClick={() => setView("artifact")}>Artifact</button>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button className="navbtn" onClick={() => setView("chat")}>Chat</button>
+          <button className="navbtn" onClick={() => setView("artifact")}>Artifact</button>
+        </div>
+        <Link href={`/challenge/${challenge.id}`} className="navbtn">Back</Link>
       </div>
 
       {view === "chat" ? (
         <div>
+          {busy ? <div className="spinner" role="status" aria-label="Loading" /> : null}
           <div style={{ display: "grid", gap: 8, marginBottom: 8 }}>
             {messages.map((m, i) => (
               <div key={i} style={{ padding: 8, borderRadius: 8, background: m.role === "user" ? "rgba(124,58,237,.18)" : "rgba(6,182,212,.18)" }}>

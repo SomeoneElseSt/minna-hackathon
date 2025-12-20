@@ -19,10 +19,12 @@ export function getOpenAiKey(): string {
   return key;
 }
 
-export function buildSystemPrompt(): string {
+export function buildSystemPrompt(purpose?: string): string {
+  const p = purpose && purpose.trim().length > 0 ? purpose.trim() : "produce a complete, self-contained HTML artifact for the current challenge";
   return [
     "You are an AI coding assistant focused on quickly producing complete artifacts.",
     "Output MUST include a full HTML document for the artifact on each turn.",
+    `Purpose: ${p}.`,
     "Rules:",
     "- Always return two sections marked with XML tags:",
     "  <assistant>...short explanation...</assistant>",
