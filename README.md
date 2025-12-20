@@ -1,4 +1,4 @@
-### Duolingo for Learning Vibe Codinggi
+# Duolingo for Learning Vibe Coding!
 
 **Live App**:
 ```
